@@ -1,0 +1,11 @@
+---
+virtual_machine_group:
+  hosts:
+    utm:
+      ansible_host: 192.168.64.3
+      ansible_user: zhe
+      host_key_checking: false
+
+target:
+  children:
+    virtual_machine_group:

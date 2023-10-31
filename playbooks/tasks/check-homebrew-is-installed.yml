@@ -1,0 +1,6 @@
+- name: Check Homebrew Is Installed
+  ansible.builtin.stat:
+    path: /opt/homebrew/bin/brew
+  register: homebrew_check
+  failed_when:
+    - not homebrew_check.stat.exists

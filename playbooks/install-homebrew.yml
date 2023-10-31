@@ -1,0 +1,47 @@
+# Install Homebrew
+---
+- name: Install Homebrew If Missing
+  hosts: target
+  vars_files:
+    - ../global.config.yml
+  vars:
+    sudoers_filename: "ansible-assign-{{ ansible_user }}-as-sudoers"
+
+  pre_tasks:
+    - name: Check Homebrew Is Installed
+      ansible.builtin.stat:
+        path: /opt/homebrew/bin/brew
+      register: homebrew_check
+      failed_when:
+        - not homebrew_check.stat.exists
+        - not install_homebrew_when_missing
+
+    - name: End If Homebrew Is Installed
+      meta: end_play
+      when:
+        - homebrew_check.stat.exists
+
+    - name: Add The Current User To Sudoers List
+      become: yes
+      community.general.sudoers:
+        name: "{{ sudoers_filename }}"
+        state: present
+        user: "{{ ansible_user }}"
+        runas: root
+        commands: ALL
+
+  tasks:
+    - name: Installing Homebrew
+      ansible.builtin.shell: |
+        NONINTERACTIVE=1 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zprofile
+      when:
+        - not homebrew_check.stat.exists
+        - install_homebrew_when_missing
+
+  post_tasks:
+    - name: Remove The Current User From Sudoers List
+      become: yes
+      community.general.sudoers:
+        name: "{{ sudoers_filename }}"
+        state: absent

@@ -1,0 +1,3 @@
+---
+- import_playbook: ./playbooks/test.yml
+- import_playbook: ./playbooks/install-homebrew.yml

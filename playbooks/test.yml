@@ -1,0 +1,19 @@
+- name: Test Ansible
+  hosts: target
+
+  tasks:
+    - name: Ping Hosts
+      ansible.builtin.ping:
+
+    - name: Print Message
+      ansible.builtin.debug:
+        msg: Hello, Ansible!
+
+    - name: Download File
+      ansible.builtin.get_url:
+        url: https://example.com
+        dest: /tmp
+
+    - name: Print Working Directory
+      ansible.builtin.shell: |
+        pwd
