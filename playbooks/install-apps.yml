@@ -12,13 +12,11 @@
       - visual-studio-code
       - 1password
       - raycast # - alfred
-      - zoom
       - notion
       - slack
       - iina
       - insomnia
       - istat-menus
-      - microsoft-remote-desktop
       - miro
 
   pre_tasks:
