@@ -11,8 +11,8 @@
       community.general.osx_defaults:
         domain: com.apple.dock
         key: tilesize
-        type: int
-        value: "24"
+        type: float
+        value: 24
       notify: "Kill Dock"
 
     - name: Auto Hide Dock
@@ -20,7 +20,7 @@
         domain: com.apple.dock
         key: autohide
         type: bool
-        value: "true"
+        value: true
       notify: "Kill Dock"
 
     - name: Disable Recent Apps In Dock
@@ -28,7 +28,7 @@
         domain: com.apple.dock
         key: show-recents
         type: bool
-        value: "false"
+        value: false
       notify: "Kill Dock"
 
     - name: Disable Minimize Animation Effect
@@ -44,7 +44,7 @@
         domain: com.apple.dock
         key: static-only
         type: bool
-        value: "true"
+        value: true
       notify: "Kill Dock"
 
     ########################################
@@ -66,7 +66,7 @@
         domain: NSGlobalDomain
         key: AppleShowAllExtensions
         type: bool
-        value: "true"
+        value: true
       notify: "Kill Finder"
 
     - name: Show Hidden Files
@@ -74,7 +74,7 @@
         domain: com.apple.finder
         key: AppleShowAllFiles
         type: bool
-        value: "true"
+        value: true
       notify: "Kill Finder"
 
     - name: Show Path Bar
@@ -82,7 +82,7 @@
         domain: com.apple.finder
         key: ShowPathbar
         type: bool
-        value: "true"
+        value: true
       notify: "Kill Finder"
 
     - name: Set The Default View Style To List
@@ -98,7 +98,7 @@
         domain: com.apple.finder
         key: FXRemoveOldTrashItems
         type: bool
-        value: "true"
+        value: true
       notify: "Kill Finder"
 
     ########################################
@@ -109,43 +109,43 @@
         domain: com.apple.AppleMultitouchTrackpad
         key: TrackpadThreeFingerDrag
         type: bool
-        value: "true"
+        value: true
 
     - name: Disable Corner Secondary Click
       community.general.osx_defaults:
         domain: com.apple.AppleMultitouchTrackpad
         key: TrackpadCornerSecondaryClick
         type: int
-        value: "0"
+        value: 0
 
     - name: Use Fx Keys As Standard Function Keys
       community.general.osx_defaults:
         domain: NSGlobalDomain
         key: com.apple.keyboard.fnState
         type: bool
-        value: "true"
+        value: true
       notify: Reboot
 
     - name: Set Initial Key Repeat Delay To 150ms
       community.general.osx_defaults:
         domain: NSGlobalDomain
         key: InitialKeyRepeat
-        type: int
-        value: "10"
+        type: float
+        value: 10
 
     - name: Set Key Repeat Delay To 30ms
       community.general.osx_defaults:
         domain: NSGlobalDomain
         key: KeyRepeat
-        type: int
-        value: "2"
+        type: float
+        value: 2
 
     - name: Disable Key Press And Hold Options
       community.general.osx_defaults:
         domain: NSGlobalDomain
         key: ApplePressAndHoldEnabled
         type: bool
-        value: "false"
+        value: false
 
     ########################################
     # Time Machine Settings
@@ -155,18 +155,18 @@
         domain: com.apple.TimeMachine
         key: DoNotOfferNewDisksForBackup
         type: bool
-        value: "true"
+        value: true
 
     ########################################
     # Iterm2 Settings
     # domain: com.googlecode.iterm2
 
-    - name: Enable AlternateMouseScroll
+    - name: Enable Iterm2 AlternateMouseScroll
       community.general.osx_defaults:
         domain: com.googlecode.iterm2
         key: AlternateMouseScroll
         type: bool
-        value: "true"
+        value: true
 
   handlers:
     - name: Kill Dock

@@ -6,6 +6,13 @@ virtual_machine_group:
       ansible_user: zhe
       host_key_checking: false
 
+laptops:
+  hosts:
+    new_mbp_14:
+      ansible_host: 192.168.0.82
+      ansible_user: user
+      host_key_checking: false
+
 target:
   children:
     virtual_machine_group:
