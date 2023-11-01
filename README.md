@@ -1,5 +1,34 @@
 # Setup macOS with Ansible
 
+## Inventories
+
+The [inventory.yml](inventory.yml) file specifies the
+address of machines to setup.
+
+To add a new target machine,
+create a new host in the `inventory.yml` file
+with the IP address and hostname,
+and add it to the `target` group.
+
+> You can also replace `inventory.yml` with your own inventory if needed.
+> Please note the group name `target` in the inventory file matters.
+
+The inventory file after changing could be like:
+
+```yaml
+# filename: inventory.yml
+---
+mbp_group:
+  hosts:
+    my_new_amazing_macbook_pro:
+      ansible_host: 192.168.0.3
+      ansible_user: elisa
+      host_key_checking: false
+target:
+  children:
+    mbp_group:
+```
+
 ## Playbooks
 
 In the main playbook file [playbook.yml](playbook.yml),
@@ -84,29 +113,6 @@ remote login via SSH has to be enabled from the target machine.
 
 1. Go to **System Preference** => **General** => **Sharing**
 2. In **Advanced** section, enable **Remote Login**
-
-Then create a new host in the `inventory.yml` file
-with the IP address and hostname,
-and add it to the `target` group.
-
-> You can also replace `inventory.yml` with your own inventory if needed.
-> Please note the group name `target` in the inventory file matters.
-
-The inventory file after changing could be like:
-
-```yaml
-# filename: inventory.yml
----
-mbp_group:
-  hosts:
-    my_new_amazing_macbook_pro:
-      ansible_host: 192.168.0.3
-      ansible_user: elisa
-      host_key_checking: false
-target:
-  children:
-    mbp_group:
-```
 
 ## Set Up MacOS
 

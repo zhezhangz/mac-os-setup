@@ -12,7 +12,7 @@
         domain: com.apple.dock
         key: tilesize
         type: int
-        value: "48"
+        value: "24"
       notify: "Kill Dock"
 
     - name: Auto Hide Dock
@@ -111,12 +111,12 @@
         type: bool
         value: "true"
 
-    - name: Enable Dragging With Three Finger Drag
+    - name: Disable Corner Secondary Click
       community.general.osx_defaults:
         domain: com.apple.AppleMultitouchTrackpad
         key: TrackpadCornerSecondaryClick
-        type: bool
-        value: "true"
+        type: int
+        value: "0"
 
     - name: Use Fx Keys As Standard Function Keys
       community.general.osx_defaults:
@@ -124,6 +124,7 @@
         key: com.apple.keyboard.fnState
         type: bool
         value: "true"
+      notify: Reboot
 
     - name: Set Initial Key Repeat Delay To 150ms
       community.general.osx_defaults:
