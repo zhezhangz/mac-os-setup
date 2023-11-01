@@ -6,6 +6,7 @@
     - ../global.config.yml
   vars:
     sudoers_filename: "ansible-assign-{{ ansible_user }}-as-sudoers"
+    install_homebrew_when_missing: true
 
   pre_tasks:
     - name: Check Homebrew Is Installed

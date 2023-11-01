@@ -1,0 +1,183 @@
+# Setup macOS
+---
+- name: Setup macOS
+  hosts: target
+
+  tasks:
+    ########################################
+    # System Dock Setting
+
+    - name: Set Dock Size
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: tilesize
+        type: int
+        value: "48"
+      notify: "Kill Dock"
+
+    - name: Auto Hide Dock
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: autohide
+        type: bool
+        value: "true"
+      notify: "Kill Dock"
+
+    - name: Disable Recent Apps In Dock
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: show-recents
+        type: bool
+        value: "false"
+      notify: "Kill Dock"
+
+    - name: Disable Minimize Animation Effect
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: mineffect
+        type: string
+        value: "scale"
+      notify: "Kill Dock"
+
+    - name: Only Show Opened Apps In Dock
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: static-only
+        type: bool
+        value: "true"
+      notify: "Kill Dock"
+
+    ########################################
+    # System Dock Setting
+
+    - name: Set Screenshot Location
+      community.general.osx_defaults:
+        domain: com.apple.screencapture
+        key: location
+        type: string
+        value: "~/Downloads"
+      notify: "Kill SystemUIServer"
+
+    ########################################
+    # Finder Setting
+
+    - name: Show Extensions
+      community.general.osx_defaults:
+        domain: NSGlobalDomain
+        key: AppleShowAllExtensions
+        type: bool
+        value: "true"
+      notify: "Kill Finder"
+
+    - name: Show Hidden Files
+      community.general.osx_defaults:
+        domain: com.apple.finder
+        key: AppleShowAllFiles
+        type: bool
+        value: "true"
+      notify: "Kill Finder"
+
+    - name: Show Path Bar
+      community.general.osx_defaults:
+        domain: com.apple.finder
+        key: ShowPathbar
+        type: bool
+        value: "true"
+      notify: "Kill Finder"
+
+    - name: Set The Default View Style To List
+      community.general.osx_defaults:
+        domain: com.apple.finder
+        key: FXPreferredViewStyle
+        type: string
+        value: "Nlsv"
+      notify: "Kill Finder"
+
+    - name: Empty Trash Bin In 30 Days
+      community.general.osx_defaults:
+        domain: com.apple.finder
+        key: FXRemoveOldTrashItems
+        type: bool
+        value: "true"
+      notify: "Kill Finder"
+
+    ########################################
+    # Trackpad and Keyboard Settings
+
+    - name: Enable Dragging With Three Finger Drag
+      community.general.osx_defaults:
+        domain: com.apple.AppleMultitouchTrackpad
+        key: TrackpadThreeFingerDrag
+        type: bool
+        value: "true"
+
+    - name: Enable Dragging With Three Finger Drag
+      community.general.osx_defaults:
+        domain: com.apple.AppleMultitouchTrackpad
+        key: TrackpadCornerSecondaryClick
+        type: bool
+        value: "true"
+
+    - name: Use Fx Keys As Standard Function Keys
+      community.general.osx_defaults:
+        domain: NSGlobalDomain
+        key: com.apple.keyboard.fnState
+        type: bool
+        value: "true"
+
+    - name: Set Initial Key Repeat Delay To 150ms
+      community.general.osx_defaults:
+        domain: NSGlobalDomain
+        key: InitialKeyRepeat
+        type: int
+        value: "10"
+
+    - name: Set Key Repeat Delay To 30ms
+      community.general.osx_defaults:
+        domain: NSGlobalDomain
+        key: KeyRepeat
+        type: int
+        value: "2"
+
+    - name: Disable Key Press And Hold Options
+      community.general.osx_defaults:
+        domain: NSGlobalDomain
+        key: ApplePressAndHoldEnabled
+        type: bool
+        value: "false"
+
+    ########################################
+    # Time Machine Settings
+
+    - name: Disable Time Machine New Disk Backup Offering
+      community.general.osx_defaults:
+        domain: com.apple.TimeMachine
+        key: DoNotOfferNewDisksForBackup
+        type: bool
+        value: "true"
+
+    ########################################
+    # Iterm2 Settings
+    # domain: com.googlecode.iterm2
+
+    - name: Enable AlternateMouseScroll
+      community.general.osx_defaults:
+        domain: com.googlecode.iterm2
+        key: AlternateMouseScroll
+        type: bool
+        value: "true"
+
+  handlers:
+    - name: Kill Dock
+      ansible.builtin.shell: killall Dock
+
+    - name: Kill SystemUIServer
+      ansible.builtin.shell: killall SystemUIServer
+
+    - name: Kill Finder
+      ansible.builtin.shell: killall Finder
+
+    - name: Reboot
+      become: true
+      ansible.builtin.reboot:
+        msg: 'Target macOS will reboot.'

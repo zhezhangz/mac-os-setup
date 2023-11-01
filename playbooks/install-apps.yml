@@ -1,0 +1,34 @@
+# Install Apps
+---
+- name: Install Apps
+  hosts: target
+  vars_files:
+    - ../global.config.yml
+  vars:
+    brew_cask_packages:
+      - google-chrome
+      - iterm2
+      - rectangle
+      - visual-studio-code
+      - 1password
+      - raycast # - alfred
+      - zoom
+      - notion
+      - slack
+      - iina
+      - insomnia
+      - istat-menus
+      - microsoft-remote-desktop
+      - miro
+
+  pre_tasks:
+    - ansible.builtin.import_tasks:
+        file: tasks/check-homebrew-is-installed.yml
+
+  tasks:
+    - name: Installing Homebrew Cask Packages
+      homebrew_cask:
+        name: "{{ brew_cask_packages }}"
+        state: present
+      register: result
+      until: result is successful

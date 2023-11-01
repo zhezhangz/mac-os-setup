@@ -1,0 +1,40 @@
+# Install Dev Apps
+---
+- name: Install Dev Apps
+  hosts: target
+  vars_files:
+    - ../global.config.yml
+  vars:
+    brew_cask_packages:
+      - jetbrains-toolbox
+    brew_packages:
+      - git
+      - jq
+      - ssh-copy-id
+      - wget
+      - tree
+      - stow
+      - jenv
+      - nvm
+      - docker
+      - docker-compose
+      - colima
+
+  pre_tasks:
+    - ansible.builtin.import_tasks:
+        file: tasks/check-homebrew-is-installed.yml
+
+  tasks:
+    - name: Installing Homebrew Packages
+      homebrew:
+        name: "{{ brew_packages }}"
+        state: present
+      register: result
+      until: result is successful
+
+    - name: Installing Homebrew Cask Packages
+      homebrew_cask:
+        name: "{{ brew_cask_packages }}"
+        state: present
+      register: result
+      until: result is successful

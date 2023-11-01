@@ -1,4 +1,2 @@
 ---
 downloads: ~/.ansible-downloads/
-
-install_homebrew_when_missing: true

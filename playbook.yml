@@ -1,3 +1,6 @@
 ---
-- import_playbook: ./playbooks/test.yml
-- import_playbook: ./playbooks/install-homebrew.yml
+- import_playbook: playbooks/install-homebrew.yml
+- import_playbook: playbooks/update-homebrew-packages.yml
+- import_playbook: playbooks/install-apps.yml
+- import_playbook: playbooks/install-dev-tools.yml
+- import_playbook: playbooks/setup-macos.yml

@@ -1,0 +1,20 @@
+---
+- name: Update Homebrew and Homebrew Packages
+  hosts: target
+  vars_files:
+    - ../global.config.yml
+
+  pre_tasks:
+    - ansible.builtin.import_tasks:
+        file: tasks/check-homebrew-is-installed.yml
+
+  tasks:
+    - name: Updating Homebrew
+      homebrew:
+        update_homebrew: true
+
+    - name: Upgrading Homebrew Packages
+      homebrew:
+        upgrade_all: true
+      register: result
+      until: result is successful
