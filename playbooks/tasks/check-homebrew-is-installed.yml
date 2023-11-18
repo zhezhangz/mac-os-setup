@@ -1,6 +1,15 @@
-- name: Check Homebrew Is Installed
+- name: Check Homebrew Is Installed On ARM Silicon
   ansible.builtin.stat:
     path: /opt/homebrew/bin/brew
   register: homebrew_check
+  when: ansible_architecture == "arm64"
+  failed_when:
+    - not homebrew_check.stat.exists
+
+- name: Check Homebrew Is Installed On Intel Silicon
+  ansible.builtin.stat:
+    path: /usr/local/bin/brew
+  register: homebrew_check
+  when: ansible_architecture == "x86_64"
   failed_when:
     - not homebrew_check.stat.exists
