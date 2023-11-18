@@ -13,6 +13,12 @@ laptops:
       ansible_user: user
       host_key_checking: false
 
+local:
+  hosts:
+    new_mac_mini_m2:
+      ansible_host: localhost
+      ansible_connection: local
+
 target:
   children:
-    virtual_machine_group:
+    local:
