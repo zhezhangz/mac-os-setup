@@ -145,7 +145,7 @@
         domain: NSGlobalDomain
         key: ApplePressAndHoldEnabled
         type: bool
-        value: false
+        value: true
 
     ########################################
     # Time Machine Settings
