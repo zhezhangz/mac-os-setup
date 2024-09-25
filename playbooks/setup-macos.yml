@@ -140,13 +140,6 @@
         type: float
         value: 2
 
-    - name: Disable Key Press And Hold Options
-      community.general.osx_defaults:
-        domain: NSGlobalDomain
-        key: ApplePressAndHoldEnabled
-        type: bool
-        value: true
-
     ########################################
     # Time Machine Settings
 
